@@ -350,12 +350,12 @@ CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)          
 KERNELFLAGS  = -O2 -mtune=cortex-a15 -mfpu=neon -fgcse-las -fpredictive-commoning
 MODFLAGS  = -DMODULE $(KERNELFLAGS)
-CFLAGS_MODULE   = $(MODFLAGS) -fno-pic
+CFLAGS_MODULE   = $(MODFLAGS) -fno-pic -mcpu=cortex-a15 -mtune=cortex-a15 -mfpu=neon-vfpv4
 AFLAGS_MODULE   = $(MODFLAGS)
 LDFLAGS_MODULE  = -T $(srctree)/scripts/module-common.lds
 CFLAGS_KERNEL  = $(KERNELFLAGS)
 ifeq ($(ENABLE_GRAPHITE),true)
-CFLAGS_KERNEL	+= -fgraphite -floop-parallelize-all -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block
+CFLAGS_KERNEL	+= -fgraphite -floop-parallelize-all -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block -mcpu=cortex-a15 -mtune=cortex-a15 -mfpu=neon-vfpv4
 endif
 AFLAGS_KERNEL  = $(KERNELFLAGS)
 CFLAGS_GCOV     = -fprofile-arcs -ftest-coverage
